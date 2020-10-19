@@ -7,7 +7,7 @@ posBallY = 250
 speedBallX = 0.20
 speedBallY = 0.17
 speedBall = 0.15
-ballAngle = PI/2
+ballAngle = random(PI/6, 5*PI/6)
 rectWidth = 75
 rectHeight = 10
 
@@ -58,18 +58,25 @@ def drawBall():
     circle(posBallX,posBallY, baseSizeBall)
     
 def mouvBall():    
-    global posBallX,posBallY, speedBallX, speedBallY,dt, speedBall, ballAngle
+    global posBallX,posBallY, speedBallX, speedBallY,dt, speedBall, ballAngle, baseSizeBall
     posBallX += cos(ballAngle) * speedBall * dt
     posBallY += sin(ballAngle) * speedBall * dt
     
-    if posBallX >= width:
-        speedBallX *= -1
-    if posBallY >= height:
-        speedBallY *= -1
-    if posBallX <= 0:
-        speedBallX *= -1
-    if posBallY <= 0:
-        speedBallY *= -1
+    if posBallX >= width-baseSizeBall/2:
+        posBallX = width - baseSizeBall/2
+        ballAngle = PI-ballAngle
+        
+    if posBallY >= height-baseSizeBall/2:
+        posBallY = height-baseSizeBall/2
+        ballAngle = 2*PI - ballAngle
+        
+    if posBallX <= baseSizeBall/2:
+        posBallX = baseSizeBall/2
+        ballAngle = PI-ballAngle
+        
+    if posBallY <= baseSizeBall/2:
+        posBallY =baseSizeBall/2
+        ballAngle = 2*PI - ballAngle
         
 def rebondRacket():
     global posRacketX,posRacketY, posBallX,posBallY, speedBallX, speedBallY,rectWidth, rectHeight
@@ -77,7 +84,7 @@ def rebondRacket():
         print("perdu")
         #exit()
     if posBallY > posRacketY and posRacketX <= posBallX <= posRacketX+rectWidth:
-        ("rebond")
+        print("rebond")
         
 def drawBricks():
     global niveau1,baseWidthBrick,baseHeightBrick
