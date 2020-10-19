@@ -26,6 +26,7 @@ niveau1 = [
 
 lastFrameTime = 0
 dt = 0
+angleMax = PI/1.9
 
 def setup():
     global lastFrameTime, dt
