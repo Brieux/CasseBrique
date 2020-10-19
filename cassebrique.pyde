@@ -4,8 +4,8 @@ posRacketY = 0
 posBallX = 0
 posBallY = 0
 
-speedBallX = 3
-speedBallY = 2
+speedBallX = 0.2
+speedBallY = 0.2
 
 rectWidth = 50
 rectHeight = 10
@@ -23,12 +23,20 @@ niveau1 = [
            [0,0,0,1,1,0,0,0]
         ]
 
+lastFrameTime = 0
+dt = 0
+
 def setup():
+    global lastFrameTime, dt
     size(400,500)
-    frameRate(75)
+    frameRate(60)
+    lastFrameTime = millis()
 
 def draw():
-    clear()
+    global lastFrameTime, dt
+    dt = millis() - lastFrameTime
+    lastFrameTime = millis()
+    clear() 
     drawRacket()
     drawBall()
     drawBricks()
@@ -48,10 +56,11 @@ def drawBall():
     global posBallX,posBallY, baseSizeBall
     circle(posBallX,posBallY, baseSizeBall)
     
-def mouvBall():
-    global posBallX,posBallY, speedBallX, speedBallY
-    posBallX += speedBallX
-    posBallY += speedBallY
+def mouvBall():    
+    global posBallX,posBallY, speedBallX, speedBallY,dt
+
+    posBallX += speedBallX * dt
+    posBallY += speedBallY * dt
     if posBallX >= width:
         speedBallX *= -1
     if posBallY >= height:
@@ -84,7 +93,6 @@ def rebondBrick():
     for i in range(len(niveau1)):
         for j in range(len(niveau1[i])):
             if j*baseWidthBrick <= posBallX <= j*baseWidthBrick +baseWidthBrick and i*baseHeightBrick <= posBallY <= i*baseHeightBrick+baseHeightBrick and niveau1[i][j] == 1:
-                print("ca touche")
                 niveau1[i][j] = 0                                             
         j += 1
     i += 1    
