@@ -2,6 +2,8 @@ ballX = 0
 ballY = 0
 
 ballSpeed = 0.2
+ballSpeedY = 0.2
+ballSpeedX = 0.2
 ballAngle = PI/5
 
 ballRadius = 20
@@ -72,16 +74,16 @@ def drawRacket():
     rect(racketX, racketY, racketWidth, racketHeight)
     
 def drawBall():
-    global ballX, ballY, ballRadius, ballAngle, ballSpeed
+    global ballX, ballY, ballRadius, ballAngle, ballSpeed, ballSpeedX, ballSpeedY
     global racketX, racketY, racketWidth, racketHeight
     global deltaTime
     global ballAngleMax
     
     #idem a ce qu'il y a au dessus
-    speedX = cos(ballAngle) * ballSpeed * deltaTime
-    speedY = sin(ballAngle) * ballSpeed * deltaTime
-    ballX += speedX
-    ballY -= speedY
+    ballSpeedX = cos(ballAngle) * ballSpeed * deltaTime
+    ballSpeedY = sin(ballAngle) * ballSpeed * deltaTime
+    ballX += ballSpeedX
+    ballY -= ballSpeedY
     
     #haut et bas   
     if(ballY-ballRadius < 0):
@@ -99,7 +101,7 @@ def drawBall():
         ballAngle = PI - ballAngle
         ballX = ballRadius
     
-    if(racketY < ballY+ballRadius < racketY+racketHeight and speedY < 0):
+    if(racketY < ballY+ballRadius < racketY+racketHeight and ballSpeedY < 0):
         if(racketX < ballX < racketX + racketWidth):
             ratio = (ballX - racketX - racketWidth/2) / (racketWidth/2)
             ballAngle = PI/2 - ratio * ballAngleMax
@@ -111,7 +113,9 @@ def drawBall():
     
 def drawBricks():
     global niveau1,baseWidthBrick,baseHeightBrick
-    global ballX, ballY
+    global ballX, ballY, ballRadius
+    global ballAngle, ballSpeedX, ballSpeedY,ballSpeed
+    
     fill(255)
     for i in range(len(niveau1)):
         for j in range(len(niveau1[i])):
@@ -121,7 +125,28 @@ def drawBricks():
         i += 1
     
     #Test de collision avec la balle
-       
+    
+    for k in range(len(niveau1)):
+        for l in range(len(niveau1[k])):
+            if niveau1[k][l] == 1: 
+                #par dessous
+                if ballSpeedY < 0 and j*baseWidthBrick < ballX < j*baseWidthBrick + baseWidthBrick and ballY < i*baseHeightBrick :
+                    print("ca tape par dessous")
+                
+                #par dessus
+                
+                
+                
+                #par la droite
+                
+                
+                
+                #par la gauche
+                
+                
+                
+            j += k
+        i += l
           
              
                 
