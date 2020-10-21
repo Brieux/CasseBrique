@@ -15,6 +15,16 @@ racketY = 0
 lastFrameTime = 0
 deltaTime = 0
 
+baseWidthBrick = 50 
+baseHeightBrick = 10 
+niveau1 = [
+           [1,1,1,1,1,1,1,1],
+           [0,1,1,1,1,1,1,0],
+           [0,0,1,1,1,1,0,0],
+           [0,0,0,1,1,0,0,0],
+           [0,0,0,1,1,0,0,0]
+        ]
+
 #ici on definit la fonction setup qui sera exécuté comme point d'entré dans mon code
 def setup():
     #on dit qu'on va faire référence à la variable global
@@ -46,6 +56,7 @@ def draw():
     
     drawRacket()
     drawBall()
+    drawBricks()
     
     
     
@@ -98,8 +109,18 @@ def drawBall():
     #draw circle
     circle(ballX, ballY, 2*ballRadius);
     
- 
+def drawBricks():
+    global niveau1,baseWidthBrick,baseHeightBrick
+    global ballX, ballY
+    fill(255)
+    for i in range(len(niveau1)):
+        for j in range(len(niveau1[i])):
+            if niveau1[i][j] == 1: 
+                rect(j*baseWidthBrick,i*baseHeightBrick,baseWidthBrick ,baseHeightBrick)
+            j += 1
+        i += 1
     
+    #Test de collision avec la balle
        
           
              
