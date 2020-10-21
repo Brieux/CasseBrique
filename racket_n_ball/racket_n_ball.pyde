@@ -4,9 +4,9 @@ ballY = 0
 ballSpeed = 0.2
 ballSpeedY = 0.2
 ballSpeedX = 0.2
-ballAngle = PI/5
+ballAngle = PI
 
-ballRadius = 20
+ballRadius = 5
 ballAngleMax = PI/1.9
 
 racketWidth = 100
@@ -117,38 +117,49 @@ def drawBricks():
     global ballAngle, ballSpeedX, ballSpeedY,ballSpeed
     
     fill(255)
-    for i in range(len(niveau1)):
-        for j in range(len(niveau1[i])):
-            if niveau1[i][j] == 1: 
-                rect(j*baseWidthBrick,i*baseHeightBrick,baseWidthBrick ,baseHeightBrick)
-            j += 1
-        i += 1
+    # for i in range(len(niveau1)):
+    #     for j in range(len(niveau1[i])):
+    #         if niveau1[i][j] == 1: 
+    #             rect(j*baseWidthBrick,i*baseHeightBrick,baseWidthBrick ,baseHeightBrick)
+    #         j += 1
+    #     i += 1
     
-    #Test de collision avec la balle
+    # #Test de collision avec la balle
     
-    for k in range(len(niveau1)):
-        for l in range(len(niveau1[k])):
-            if niveau1[k][l] == 1: 
-                #par dessous
-                if ballSpeedY < 0 and j*baseWidthBrick < ballX < j*baseWidthBrick + baseWidthBrick and ballY < i*baseHeightBrick :
-                    print("ca tape par dessous")
+    # for k in range(len(niveau1)):
+    #     for l in range(len(niveau1[k])):
+    #         if niveau1[k][l] == 1: 
+    #             #par dessous
+    #             if ballSpeedY > 0 and j*baseWidthBrick < ballX + ballRadius < j*baseWidthBrick + baseWidthBrick and ballY + ballRadius  < i*baseHeightBrick :
+    #                 print("ca tape par dessous")
                 
-                #par dessus
-                
-                
-                
-                #par la droite
+    #             #par dessus
                 
                 
                 
-                #par la gauche
+    #             #par la droite
                 
                 
                 
-            j += k
-        i += l
-          
-             
+    #             #par la gauche
+                
+                
+                
+    #         l += 1
+    #     k += 1
+    bX = 150
+    bY = 150
+    bW = 100
+    bL = 100
+    rect(bX, bY, bW, bL)
+    if ballSpeedY > 0 and bX < ballX + ballRadius <bX + bW and ballY + ballRadius  <= bY + bL :
+        print("ca tape par dessous")
+    if ballSpeedY < 0 and bX < ballX + ballRadius <bX + bW and ballY + ballRadius  >= bY :
+        print("ca tape par dessus")
+    if ballSpeedX > 0 and ballX + ballRadius <= bX + bW and bY < ballY + ballRadius  < bY + bL :
+        print("ca tape par la droite")
+    if ballSpeedX < 0 and ballX + ballRadius >= bX and bY < ballY + ballRadius  < bY + bL :
+        print("ca tape par la gauche")
                 
                    
                       
