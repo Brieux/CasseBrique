@@ -8,7 +8,7 @@ speedBallX = 0.20
 speedBallY = 0.17
 speedBall = 0.15
 ballAngle = random(PI/6, 5*PI/6)
-rectWidth = 75
+rectWidth = 90
 rectHeight = 10
 
 baseHeightRacket = 40
@@ -26,12 +26,12 @@ niveau1 = [
 
 lastFrameTime = 0
 dt = 0
-angleMax = PI/1.9
+angleMax = 11*PI/6
 
 def setup():
     global lastFrameTime, dt
     size(400,500)
-    frameRate(60)
+    frameRate(90)
     lastFrameTime = millis()
 
 def draw():
@@ -80,11 +80,16 @@ def mouvBall():
         ballAngle = 2*PI - ballAngle
         
 def rebondRacket():
-    global posRacketX,posRacketY, posBallX,posBallY, speedBallX, speedBallY,rectWidth, rectHeight
+    
+    global posRacketX,posRacketY, posBallX,posBallY, speedBallX, speedBallY, ballAngle,rectWidth, rectHeight, angleMax, baseSizeBall
     if posBallY > posRacketY+rectHeight*2: 
         print("perdu")
         #exit()
     if posBallY > posRacketY and posRacketX <= posBallX <= posRacketX+rectWidth:
+        ratio = (posBallX - posRacketX- rectWidth/2)/rectWidth/2
+        angle = 3*PI/2 +ratio * angleMax
+        ballAngle = angle
+        posBallY = posRacketY  - baseSizeBall/2
         print("rebond")
         
 def drawBricks():
