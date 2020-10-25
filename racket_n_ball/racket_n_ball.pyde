@@ -2,9 +2,9 @@ ballX = 0
 ballY = 0
 
 ballSpeed = 0.2
-ballSpeedY = 0.2
-ballSpeedX = 0.2
-ballAngle = PI
+ballSpeedY = 0
+ballSpeedX = 0
+ballAngle = PI/2
 
 ballRadius = 5
 ballAngleMax = PI/1.9
@@ -150,16 +150,20 @@ def drawBricks():
     bX = 150
     bY = 150
     bW = 100
-    bL = 100
-    rect(bX, bY, bW, bL)
-    if ballSpeedY > 0 and bX < ballX + ballRadius <bX + bW and ballY + ballRadius  <= bY + bL :
+    bH = 100
+    rect(bX, bY, bW, bH)
+    if 0 < ballAngle < PI and bX <= ballX + ballRadius <= bX + bW and bY + bH - ballRadius <= ballY + ballRadius <= bY + bH + ballRadius  :
         print("ca tape par dessous")
-    if ballSpeedY < 0 and bX < ballX + ballRadius <bX + bW and ballY + ballRadius  >= bY :
+        ballAngle = 3*PI/2
+    if PI < ballAngle < 2*PI and bX <= ballX + ballRadius <= bX + bW and bY - ballRadius  <= ballY + ballRadius  <= bY+ ballRadius:
         print("ca tape par dessus")
-    if ballSpeedX > 0 and ballX + ballRadius <= bX + bW and bY < ballY + ballRadius  < bY + bL :
-        print("ca tape par la droite")
-    if ballSpeedX < 0 and ballX + ballRadius >= bX and bY < ballY + ballRadius  < bY + bL :
+        ballAngle = PI/2
+    if PI/2 < ballAngle <3*PI/2 and bX - ballRadius <= ballX + ballRadius <= bX+ ballRadius and bY < ballY + ballRadius  < bY + bH :
         print("ca tape par la gauche")
+        ballAngle = 0
+    if 3*PI/2 < ballAngle <5*PI/2 and bX +bW  - ballRadius <= ballX + ballRadius <= bX+ bW  +ballRadius and bY < ballY + ballRadius  < bY + bH :
+        print("ca tape par la droite")
+        ballAngle = PI
                 
                    
                       
